@@ -7,17 +7,18 @@
 //
 
 import UIKit
+import Disco
 
 class ViewController: UIViewController {
+    @IBOutlet var animatedView: UIView!
+    var animation: AnimationRunner?
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        animation = animatedView.disco
+            .moveCenter(to: CGPoint(x: 20.0, y: 2.0))
+            .duration(5.0)
+            .start()
     }
 
 }

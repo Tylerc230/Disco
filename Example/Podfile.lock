@@ -1,0 +1,16 @@
+PODS:
+  - Disco (0.1.0)
+
+DEPENDENCIES:
+  - Disco (from `../`)
+
+EXTERNAL SOURCES:
+  Disco:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Disco: 938b045709ba48eab7df05ecf83ddf7bcb53538f
+
+PODFILE CHECKSUM: 094a83b29dec2c563aa7c3ba2ef99f888f7e7cb2
+
+COCOAPODS: 1.5.3
