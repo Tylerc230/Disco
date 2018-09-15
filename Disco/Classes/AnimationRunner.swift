@@ -1,13 +1,14 @@
 public struct AnimationRunner {
     init(sequence: AnimationSequence) {
         self.sequence = sequence
-        animator = UIViewPropertyAnimator(duration: sequence.totalDuration, curve: .linear)
+        animator = selectAnimator(from: sequence)
         animator.addAnimations(animations())
     }
     public func start() {
         animator.startAnimation()
     }
     
+
     private func animations() -> (() -> ()) {
         var sequence = self.sequence
         let step = sequence.popStep()
@@ -28,4 +29,18 @@ public struct AnimationRunner {
     }
     private let animator: UIViewPropertyAnimator
     private let sequence: AnimationSequence
+}
+
+private func selectAnimator(from sequence: AnimationSequence) -> UIViewPropertyAnimator {
+    let duration = sequence.totalDuration
+    switch sequence.timing {
+    case let .predefined(curve):
+        return UIViewPropertyAnimator(duration: duration, curve: curve)
+    case let .bezier(pt1, pt2):
+        return UIViewPropertyAnimator(duration: duration, controlPoint1: pt1, controlPoint2: pt2)
+    case let .springBased(dampingRatio):
+        return UIViewPropertyAnimator(duration: duration, dampingRatio: dampingRatio)
+    case let .timingParameters(timingParameters):
+        return UIViewPropertyAnimator(duration: duration, timingParameters: timingParameters)
+    }
 }
