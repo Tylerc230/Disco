@@ -17,6 +17,7 @@ class ViewController: UIViewController {
         super.viewWillAppear(animated)
         animation = animatedView.disco
             .moveCenter(to: CGPoint(x: 20.0, y: 2.0))
+            .setBackgroundColor(to: .red)
             .duration(5.0)
             .start()
     }
