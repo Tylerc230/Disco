@@ -1,3 +1,7 @@
+todo:
+relative start times for steps (consider .at(startTime:)
+Implement scrubbing, pausing, reversing etc (on AnimationRunner)
+
 # Disco
 
 [![CI Status](https://img.shields.io/travis/Tyler Casselman/Disco.svg?style=flat)](https://travis-ci.org/Tyler Casselman/Disco)
