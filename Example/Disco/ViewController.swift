@@ -19,6 +19,8 @@ class ViewController: UIViewController {
             .moveCenter(to: CGPoint(x: 20.0, y: 2.0))
             .setBackgroundColor(to: .red)
             .duration(5.0)
+            .then()
+            .setBackgroundColor(to: .blue)
             .start()
     }
 

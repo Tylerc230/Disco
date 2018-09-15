@@ -18,6 +18,12 @@ public struct AnimationSequence {
         return newSequence
     }
     
+    public func then() -> AnimationSequence {
+        var newSequence = self
+        newSequence.steps.append(AnimationStep())
+        return newSequence
+    }
+    
     public func updateFrame(to frame: CGRect) -> AnimationSequence {
         return setCurrentStep(property: \AnimationStep.frame, to: frame)
     }
@@ -72,6 +78,10 @@ public struct AnimationSequence {
         return steps.map { $0.duration}.reduce(0, +)
     }
     
+    internal var isKeyframeAnimation: Bool {
+        return steps.count > 1
+    }
+    
     private func setCurrentStep<P>(property: WritableKeyPath<AnimationStep, P>, to value: P) -> AnimationSequence {
         var newSequence = self
         newSequence.currentStep[keyPath: property] = value
@@ -89,6 +99,6 @@ public struct AnimationSequence {
     }
     internal let view: UIView
     internal var timing: TimingType = .predefined(.easeInOut)
-    private var steps = [AnimationStep()]
+    internal var steps = [AnimationStep()]
 }
 

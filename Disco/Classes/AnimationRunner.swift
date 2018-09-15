@@ -2,16 +2,35 @@ public struct AnimationRunner {
     init(sequence: AnimationSequence) {
         self.sequence = sequence
         animator = selectAnimator(from: sequence)
-        animator.addAnimations(animations())
+        if sequence.isKeyframeAnimation {
+            animator.addAnimations(keyframeAnimations())
+        } else {
+            animator.addAnimations(singleStepAnimation())
+        }
     }
+    
     public func start() {
         animator.startAnimation()
     }
     
+    private func singleStepAnimation() -> () -> () {
+        return animations(for: sequence.steps.first!)
+    }
 
-    private func animations() -> (() -> ()) {
-        var sequence = self.sequence
-        let step = sequence.popStep()
+    private func keyframeAnimations() -> () -> () {
+        return {
+            UIView.animateKeyframes(withDuration: 0.0, delay: 0.0, options: [], animations: {
+                var relativeStartTime = 0.0
+                self.sequence.steps.forEach { step in
+                    let relativeDuration = step.duration/self.sequence.totalDuration
+                    UIView.addKeyframe(withRelativeStartTime: relativeStartTime, relativeDuration: relativeDuration, animations: self.animations(for: step))
+                    relativeStartTime += relativeDuration
+                }
+            }, completion: nil)
+        }
+    }
+    
+    private func animations(for step: AnimationSequence.AnimationStep) -> (() -> ()) {
         return {
             self.setProperty(viewProp: \.frame, stepProp: step.frame)
             self.setProperty(viewProp: \.bounds, stepProp: step.bounds)
