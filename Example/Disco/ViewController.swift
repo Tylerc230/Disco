@@ -11,6 +11,7 @@ import Disco
 
 class ViewController: UIViewController {
     @IBOutlet var animatedView: UIView!
+    @IBOutlet var slider: UISlider!
     var animation: AnimationRunner?
 
     override func viewWillAppear(_ animated: Bool) {
@@ -21,7 +22,12 @@ class ViewController: UIViewController {
             .duration(5.0)
             .then()
             .setBackgroundColor(to: .blue)
-            .start()
+            .paused()
+    }
+    
+    @IBAction
+    func sliderDidChange() {
+        animation?.setFractionComplete(CGFloat(slider.value))
     }
 
 }

@@ -48,8 +48,13 @@ public struct AnimationSequence {
         return setCurrentStep(property: \AnimationStep.backgroundColor, to: backgroundColor)
     }
     
-    public func start() -> AnimationRunner {
+    public func paused() -> AnimationRunner {
         let runner = AnimationRunner(sequence: self)
+        return runner
+    }
+    
+    public func start() -> AnimationRunner {
+        let runner = paused()
         runner.start()
         return runner
     }

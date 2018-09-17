@@ -13,6 +13,22 @@ public struct AnimationRunner {
         animator.startAnimation()
     }
     
+    public func pause() {
+        animator.pauseAnimation()
+    }
+    
+    public func stopAnimation() {
+        animator.stopAnimation(false)
+    }
+    
+    public func setFractionComplete(_ fractionComplete: CGFloat) {
+        animator.fractionComplete = fractionComplete
+    }
+    
+    public func reverseAnimation(_ reverse: Bool) {
+        animator.isReversed = reverse
+    }
+    
     private func singleStepAnimation() -> () -> () {
         return animations(for: sequence.steps.first!)
     }
