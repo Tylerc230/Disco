@@ -22,7 +22,10 @@ class ViewController: UIViewController {
             .duration(5.0)
             .then()
             .setBackgroundColor(to: .blue)
-            .paused()
+            .addCompletion { (position) in
+                print("HERE")
+            }
+            .start()
     }
     
     @IBAction

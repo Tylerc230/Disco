@@ -7,6 +7,7 @@ public struct AnimationRunner {
         } else {
             animator.addAnimations(singleStepAnimation())
         }
+        sequence.completions.forEach (animator.addCompletion)
     }
     
     public func start() {

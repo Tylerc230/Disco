@@ -4,7 +4,6 @@ Implement scrubbing, pausing, reversing etc (on AnimationRunner)
 Add predefined values for UISpringTimingParameters and UICubicTimingParameters
 Completion blocks
 Add startwith delay
-Add start in paused state
 
 # Disco
 

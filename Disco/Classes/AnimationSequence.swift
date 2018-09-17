@@ -6,6 +6,8 @@ public struct AnimationSequence {
         case timingParameters(UITimingCurveProvider)
     }
     
+    public typealias Completion = (UIViewAnimatingPosition) -> ()
+    
     public func setTiming(_ timing: TimingType) -> AnimationSequence {
         var newSequence = self
         newSequence.timing = timing
@@ -46,6 +48,12 @@ public struct AnimationSequence {
     
     public func setBackgroundColor(to backgroundColor: UIColor) -> AnimationSequence {
         return setCurrentStep(property: \AnimationStep.backgroundColor, to: backgroundColor)
+    }
+    
+    public func addCompletion(_ completion: @escaping Completion) -> AnimationSequence {
+        var newSequence = self
+        newSequence.completions.append(completion)
+        return newSequence
     }
     
     public func paused() -> AnimationRunner {
@@ -105,5 +113,6 @@ public struct AnimationSequence {
     internal let view: UIView
     internal var timing: TimingType = .predefined(.easeInOut)
     internal var steps = [AnimationStep()]
+    internal var completions = [Completion]()
 }
 
