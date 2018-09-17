@@ -23,7 +23,7 @@ class ViewController: UIViewController {
             .then()
             .setBackgroundColor(to: .blue)
             .addCompletion { (position) in
-                print("HERE")
+                print("HERE \(position.rawValue)")
             }
             .start()
     }
@@ -31,6 +31,11 @@ class ViewController: UIViewController {
     @IBAction
     func sliderDidChange() {
         animation?.setFractionComplete(CGFloat(slider.value))
+    }
+    
+    @IBAction
+    func pauseTapped() {
+        animation?.stop()
     }
 
 }

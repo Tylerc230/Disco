@@ -1,8 +1,9 @@
 todo:
+Update example app
+Documentation
+Add support for global vs key frame animations
 relative start times for steps (consider .at(startTime:)
-Implement scrubbing, pausing, reversing etc (on AnimationRunner)
 Add predefined values for UISpringTimingParameters and UICubicTimingParameters
-Completion blocks
 Add startwith delay
 
 # Disco

@@ -10,6 +10,10 @@ public struct AnimationRunner {
         sequence.completions.forEach (animator.addCompletion)
     }
     
+    var isRunning: Bool {
+        return animator.isRunning
+    }
+    
     public func start() {
         animator.startAnimation()
     }
@@ -18,15 +22,15 @@ public struct AnimationRunner {
         animator.pauseAnimation()
     }
     
-    public func stopAnimation() {
-        animator.stopAnimation(false)
+    public func stop() {
+        animator.stopAnimation(true)
     }
     
     public func setFractionComplete(_ fractionComplete: CGFloat) {
         animator.fractionComplete = fractionComplete
     }
     
-    public func reverseAnimation(_ reverse: Bool) {
+    public func reverse(_ reverse: Bool) {
         animator.isReversed = reverse
     }
     
@@ -63,7 +67,7 @@ public struct AnimationRunner {
             sequence.view[keyPath: viewProp] = stepProp
         }
     }
-    private let animator: UIViewPropertyAnimator
+    public let animator: UIViewPropertyAnimator
     private let sequence: AnimationSequence
 }
 
