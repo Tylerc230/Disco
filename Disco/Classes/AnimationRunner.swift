@@ -53,6 +53,7 @@ public struct AnimationRunner {
     
     private func animations(for step: AnimationSequence.AnimationStep) -> (() -> ()) {
         return {
+            step.animationBlocks.forEach { $0() }
             self.setProperty(viewProp: \.frame, stepProp: step.frame)
             self.setProperty(viewProp: \.bounds, stepProp: step.bounds)
             self.setProperty(viewProp: \.center, stepProp: step.center)

@@ -7,6 +7,7 @@ public struct AnimationSequence {
     }
     
     public typealias Completion = (UIViewAnimatingPosition) -> ()
+    public typealias AnimationBlock = () -> ()
     
     public func setTiming(_ timing: TimingType) -> AnimationSequence {
         var newSequence = self
@@ -50,6 +51,12 @@ public struct AnimationSequence {
         return setCurrentStep(property: \AnimationStep.backgroundColor, to: backgroundColor)
     }
     
+    public func addAnimationBlock(_ animationBlock: @escaping AnimationBlock) -> AnimationSequence {
+        var newSequence = self
+        newSequence.currentStep.animationBlocks.append(animationBlock)
+        return newSequence
+    }
+    
     public func addCompletion(_ completion: @escaping Completion) -> AnimationSequence {
         var newSequence = self
         newSequence.completions.append(completion)
@@ -75,6 +82,7 @@ public struct AnimationSequence {
         var transform: CGAffineTransform?
         var alpha: CGFloat?
         var backgroundColor: UIColor?
+        var animationBlocks: [AnimationBlock] = []
     }
     
     internal init(view: UIView) {
