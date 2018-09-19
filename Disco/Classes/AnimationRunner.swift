@@ -58,14 +58,18 @@ public struct AnimationRunner {
             self.setProperty(viewProp: \.center, stepProp: step.center)
             self.setProperty(viewProp: \.transform, stepProp: step.transform)
             self.setProperty(viewProp: \.alpha, stepProp: step.alpha)
-            self.setProperty(viewProp: \.backgroundColor, stepProp: step.backgroundColor)
+            if let color = step.backgroundColor {
+                self.sequence.view.backgroundColor = color
+            }
+//            self.setProperty(viewProp: \.backgroundColor, stepProp: step.backgroundColor)//Ends up being Optional<Optional<UIColor>> since UIView.backgroundColor is UIColor?
         }
     }
     
     private func setProperty<T>(viewProp: ReferenceWritableKeyPath<UIView, T>, stepProp: T?) {
-        if let stepProp = stepProp {
-            sequence.view[keyPath: viewProp] = stepProp
+        guard let stepProp = stepProp else {
+            return
         }
+        sequence.view[keyPath: viewProp] = stepProp
     }
     public let animator: UIViewPropertyAnimator
     private let sequence: AnimationSequence
