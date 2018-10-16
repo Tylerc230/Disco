@@ -7,7 +7,7 @@ public struct AnimationSequence {
     }
     
     public typealias Completion = (UIViewAnimatingPosition) -> ()
-    public typealias AnimationBlock = () -> ()
+    public typealias AnimationBlock = (UIView) -> ()
     
     public func setTiming(_ timing: TimingType) -> AnimationSequence {
         var newSequence = self
@@ -68,6 +68,7 @@ public struct AnimationSequence {
         return runner
     }
     
+    @discardableResult
     public func start() -> AnimationRunner {
         let runner = paused()
         runner.start()

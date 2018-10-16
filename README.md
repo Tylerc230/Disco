@@ -5,6 +5,7 @@ Add support for global vs key frame animations
 relative start times for steps (consider .at(startTime:)
 Add predefined values for UISpringTimingParameters and UICubicTimingParameters
 Add startwith delay
+Add ability to modify existing transforms
 
 # Disco
 
